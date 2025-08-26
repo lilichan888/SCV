@@ -1,0 +1,241 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "ecfa0bd8-881d-4d52-ae1b-af25137af2ae",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": 40,
+      "y": 40
+    },
+    "ActionMetadata": {
+      "ecfa0bd8-881d-4d52-ae1b-af25137af2ae": {
+        "position": {
+          "x": 130.4,
+          "y": 42.4
+        }
+      },
+      "7d7fc0fb-f5f6-47b8-bb6e-890d768c07a3": {
+        "position": {
+          "x": 356.8,
+          "y": 44.8
+        },
+        "parameters": {
+          "TextToSpeechVoice": {
+            "languageCode": "en-SG"
+          }
+        },
+        "overrideConsoleVoice": true
+      },
+      "26fa3f9b-3f6b-4162-8c85-ad8c9933c39a": {
+        "position": {
+          "x": 600.8,
+          "y": 48.8
+        }
+      },
+      "4315e24e-6b7e-4ce2-985a-d7e324296d79": {
+        "position": {
+          "x": 831.2,
+          "y": 49.6
+        }
+      },
+      "927aafe7-144b-481c-becd-533d9e714dfc": {
+        "position": {
+          "x": 364.8,
+          "y": 346.4
+        },
+        "conditionMetadata": [],
+        "countryCodePrefix": "+1"
+      },
+      "62e275a7-e865-4500-bdad-1655688f0a5c": {
+        "position": {
+          "x": 1099.2,
+          "y": 436.8
+        }
+      },
+      "97c2698f-e1d2-467d-bafc-6ee63770d386": {
+        "position": {
+          "x": 616.8,
+          "y": 371.2
+        },
+        "parameters": {
+          "Attributes": {
+            "case_number": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicParams": [
+          "case_number"
+        ]
+      },
+      "5353091a-8c6f-4a54-bb34-e74ddd00d59b": {
+        "position": {
+          "x": 847.2,
+          "y": 372.8
+        }
+      }
+    },
+    "Annotations": [],
+    "name": "AWS_Personalization",
+    "description": "",
+    "type": "contactFlow",
+    "status": "published",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {
+        "FlowLoggingBehavior": "Enabled"
+      },
+      "Identifier": "ecfa0bd8-881d-4d52-ae1b-af25137af2ae",
+      "Type": "UpdateFlowLoggingBehavior",
+      "Transitions": {
+        "NextAction": "7d7fc0fb-f5f6-47b8-bb6e-890d768c07a3"
+      }
+    },
+    {
+      "Parameters": {
+        "TextToSpeechEngine": "Neural",
+        "TextToSpeechStyle": "None",
+        "TextToSpeechVoice": "Jasmine"
+      },
+      "Identifier": "7d7fc0fb-f5f6-47b8-bb6e-890d768c07a3",
+      "Type": "UpdateContactTextToSpeechVoice",
+      "Transitions": {
+        "NextAction": "26fa3f9b-3f6b-4162-8c85-ad8c9933c39a",
+        "Errors": [
+          {
+            "NextAction": "26fa3f9b-3f6b-4162-8c85-ad8c9933c39a",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "RecordingBehavior": {
+          "RecordedParticipants": [
+            "Agent",
+            "Customer"
+          ],
+          "IVRRecordingBehavior": "Enabled"
+        },
+        "AnalyticsBehavior": {
+          "Enabled": "True",
+          "AnalyticsLanguage": "en-GB",
+          "AnalyticsRedactionBehavior": "Disabled",
+          "AnalyticsRedactionResults": "RedactedAndOriginal",
+          "ChannelConfiguration": {
+            "Chat": {
+              "AnalyticsModes": [
+                "ContactLens"
+              ]
+            },
+            "Voice": {
+              "AnalyticsModes": [
+                "RealTime"
+              ]
+            }
+          },
+          "SummaryConfiguration": {
+            "SummaryModes": [
+              "PostContact"
+            ]
+          },
+          "SentimentConfiguration": {
+            "Enabled": "True"
+          }
+        }
+      },
+      "Identifier": "26fa3f9b-3f6b-4162-8c85-ad8c9933c39a",
+      "Type": "UpdateContactRecordingBehavior",
+      "Transitions": {
+        "NextAction": "4315e24e-6b7e-4ce2-985a-d7e324296d79"
+      }
+    },
+    {
+      "Parameters": {
+        "SSML": "<speak>\n    Hello! You are calling from <say-as interpret-as=\"telephone\">$.CustomerEndpoint.Address</say-as>.\n</speak>"
+      },
+      "Identifier": "4315e24e-6b7e-4ce2-985a-d7e324296d79",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "927aafe7-144b-481c-becd-533d9e714dfc",
+        "Errors": [
+          {
+            "NextAction": "927aafe7-144b-481c-becd-533d9e714dfc",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "StoreInput": "True",
+        "InputTimeLimitSeconds": "5",
+        "Text": "Please enter your case number, followed by the pound key",
+        "DTMFConfiguration": {
+          "DisableCancelKey": "False",
+          "InputTerminationSequence": "#",
+          "InterdigitTimeLimitSeconds": "5"
+        },
+        "InputValidation": {
+          "CustomValidation": {
+            "MaximumLength": "20"
+          }
+        }
+      },
+      "Identifier": "927aafe7-144b-481c-becd-533d9e714dfc",
+      "Type": "GetParticipantInput",
+      "Transitions": {
+        "NextAction": "97c2698f-e1d2-467d-bafc-6ee63770d386",
+        "Errors": [
+          {
+            "NextAction": "97c2698f-e1d2-467d-bafc-6ee63770d386",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "62e275a7-e865-4500-bdad-1655688f0a5c",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "case_number": "$.StoredCustomerInput"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "97c2698f-e1d2-467d-bafc-6ee63770d386",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "5353091a-8c6f-4a54-bb34-e74ddd00d59b",
+        "Errors": [
+          {
+            "NextAction": "5353091a-8c6f-4a54-bb34-e74ddd00d59b",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SSML": "<speak>\n    You entered <prosody rate=\"x-slow\"><say-as interpret-as=\"digits\">$.Attributes.case_number</say-as></prosody>.\n</speak>"
+      },
+      "Identifier": "5353091a-8c6f-4a54-bb34-e74ddd00d59b",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "62e275a7-e865-4500-bdad-1655688f0a5c",
+        "Errors": [
+          {
+            "NextAction": "62e275a7-e865-4500-bdad-1655688f0a5c",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ]
+}

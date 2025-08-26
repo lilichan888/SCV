@@ -1,0 +1,432 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "ecfa0bd8-881d-4d52-ae1b-af25137af2ae",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": 40,
+      "y": 40
+    },
+    "ActionMetadata": {
+      "ecfa0bd8-881d-4d52-ae1b-af25137af2ae": {
+        "position": {
+          "x": 130.4,
+          "y": 42.4
+        }
+      },
+      "62e275a7-e865-4500-bdad-1655688f0a5c": {
+        "position": {
+          "x": 1115.2,
+          "y": 832
+        }
+      },
+      "7d7fc0fb-f5f6-47b8-bb6e-890d768c07a3": {
+        "position": {
+          "x": 356.8,
+          "y": 44.8
+        },
+        "parameters": {
+          "TextToSpeechVoice": {
+            "languageCode": "en-SG"
+          }
+        },
+        "overrideConsoleVoice": true
+      },
+      "26fa3f9b-3f6b-4162-8c85-ad8c9933c39a": {
+        "position": {
+          "x": 600.8,
+          "y": 48.8
+        }
+      },
+      "b8786ed4-4301-4363-aff8-a7a5e8cf7fdf": {
+        "position": {
+          "x": 856.8,
+          "y": 51.2
+        },
+        "parameters": {
+          "LambdaFunctionARN": {
+            "displayName": "myacscv-InvokeSalesforceRestApiFunction:active"
+          }
+        },
+        "dynamicMetadata": {
+          "methodName": false,
+          "soql": false
+        }
+      },
+      "a1b4440e-f2d0-4c3d-ad70-b80568d0deab": {
+        "position": {
+          "x": 1127.2,
+          "y": 54.4
+        },
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "320f7d74-c612-40aa-899a-b50ca3d885ae",
+            "operator": {
+              "name": "Starts with",
+              "value": "StartsWith",
+              "shortDisplay": "starts with"
+            },
+            "value": "003"
+          }
+        ]
+      },
+      "a28e7326-2523-4e06-aeb8-70588e96b126": {
+        "position": {
+          "x": 170.4,
+          "y": 323.2
+        },
+        "parameters": {
+          "Attributes": {
+            "FirstName": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicParams": [
+          "FirstName"
+        ]
+      },
+      "4315e24e-6b7e-4ce2-985a-d7e324296d79": {
+        "position": {
+          "x": 1060.8,
+          "y": 374.4
+        }
+      },
+      "b85d93fc-d552-4a35-b738-7a9ca9b363e2": {
+        "position": {
+          "x": 449.6,
+          "y": 325.6
+        },
+        "parameters": {
+          "LambdaFunctionARN": {
+            "displayName": "simple_greeting_personalization"
+          },
+          "LambdaInvocationAttributes": {
+            "Birthdate": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicMetadata": {
+          "Birthdate": true
+        }
+      },
+      "aaee082b-9549-473d-a879-99b3df90eb83": {
+        "position": {
+          "x": 708.8,
+          "y": 335.2
+        },
+        "parameters": {
+          "Text": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "5353091a-8c6f-4a54-bb34-e74ddd00d59b": {
+        "position": {
+          "x": 862.4,
+          "y": 767.2
+        }
+      },
+      "927aafe7-144b-481c-becd-533d9e714dfc": {
+        "position": {
+          "x": 379.2,
+          "y": 740.8
+        },
+        "conditionMetadata": [],
+        "countryCodePrefix": "+1"
+      },
+      "97c2698f-e1d2-467d-bafc-6ee63770d386": {
+        "position": {
+          "x": 631.2,
+          "y": 765.6
+        },
+        "parameters": {
+          "Attributes": {
+            "case_number": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicParams": [
+          "case_number"
+        ]
+      }
+    },
+    "Annotations": [],
+    "name": "AWS_Personalization-2",
+    "description": "",
+    "type": "contactFlow",
+    "status": "PUBLISHED",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {
+        "FlowLoggingBehavior": "Enabled"
+      },
+      "Identifier": "ecfa0bd8-881d-4d52-ae1b-af25137af2ae",
+      "Type": "UpdateFlowLoggingBehavior",
+      "Transitions": {
+        "NextAction": "7d7fc0fb-f5f6-47b8-bb6e-890d768c07a3"
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "62e275a7-e865-4500-bdad-1655688f0a5c",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "TextToSpeechEngine": "Neural",
+        "TextToSpeechStyle": "None",
+        "TextToSpeechVoice": "Jasmine"
+      },
+      "Identifier": "7d7fc0fb-f5f6-47b8-bb6e-890d768c07a3",
+      "Type": "UpdateContactTextToSpeechVoice",
+      "Transitions": {
+        "NextAction": "26fa3f9b-3f6b-4162-8c85-ad8c9933c39a",
+        "Errors": [
+          {
+            "NextAction": "26fa3f9b-3f6b-4162-8c85-ad8c9933c39a",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "RecordingBehavior": {
+          "RecordedParticipants": [
+            "Agent",
+            "Customer"
+          ],
+          "IVRRecordingBehavior": "Enabled"
+        },
+        "AnalyticsBehavior": {
+          "Enabled": "True",
+          "AnalyticsLanguage": "en-GB",
+          "AnalyticsRedactionBehavior": "Disabled",
+          "AnalyticsRedactionResults": "RedactedAndOriginal",
+          "ChannelConfiguration": {
+            "Chat": {
+              "AnalyticsModes": [
+                "ContactLens"
+              ]
+            },
+            "Voice": {
+              "AnalyticsModes": [
+                "RealTime"
+              ]
+            }
+          },
+          "SummaryConfiguration": {
+            "SummaryModes": [
+              "PostContact"
+            ]
+          },
+          "SentimentConfiguration": {
+            "Enabled": "True"
+          }
+        }
+      },
+      "Identifier": "26fa3f9b-3f6b-4162-8c85-ad8c9933c39a",
+      "Type": "UpdateContactRecordingBehavior",
+      "Transitions": {
+        "NextAction": "b8786ed4-4301-4363-aff8-a7a5e8cf7fdf"
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "arn:aws:lambda:us-west-2:050381226131:function:myacscv-InvokeSalesforceRestApiFunction:active",
+        "InvocationTimeLimitSeconds": "3",
+        "InvocationType": "SYNCHRONOUS",
+        "LambdaInvocationAttributes": {
+          "methodName": "queryRecord",
+          "soql": "SELECT Id,FirstName,Birthdate FROM Contact WHERE Phone = '$.CustomerEndpoint.Address'"
+        },
+        "ResponseValidation": {
+          "ResponseType": "STRING_MAP"
+        }
+      },
+      "Identifier": "b8786ed4-4301-4363-aff8-a7a5e8cf7fdf",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "a1b4440e-f2d0-4c3d-ad70-b80568d0deab",
+        "Errors": [
+          {
+            "NextAction": "a1b4440e-f2d0-4c3d-ad70-b80568d0deab",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.External.Id"
+      },
+      "Identifier": "a1b4440e-f2d0-4c3d-ad70-b80568d0deab",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "a28e7326-2523-4e06-aeb8-70588e96b126",
+        "Conditions": [
+          {
+            "NextAction": "a28e7326-2523-4e06-aeb8-70588e96b126",
+            "Condition": {
+              "Operator": "TextStartsWith",
+              "Operands": [
+                "003"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "a28e7326-2523-4e06-aeb8-70588e96b126",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "FirstName": "$.External.FirstName"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "a28e7326-2523-4e06-aeb8-70588e96b126",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "b85d93fc-d552-4a35-b738-7a9ca9b363e2",
+        "Errors": [
+          {
+            "NextAction": "b85d93fc-d552-4a35-b738-7a9ca9b363e2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SSML": "<speak>\n    Thank you for calling Any Airlines.\n</speak>"
+      },
+      "Identifier": "4315e24e-6b7e-4ce2-985a-d7e324296d79",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "927aafe7-144b-481c-becd-533d9e714dfc",
+        "Errors": [
+          {
+            "NextAction": "927aafe7-144b-481c-becd-533d9e714dfc",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "arn:aws:lambda:us-west-2:050381226131:function:simple_greeting_personalization",
+        "InvocationTimeLimitSeconds": "3",
+        "InvocationType": "SYNCHRONOUS",
+        "LambdaInvocationAttributes": {
+          "Birthdate": "$.External.Birthdate"
+        },
+        "ResponseValidation": {
+          "ResponseType": "STRING_MAP"
+        }
+      },
+      "Identifier": "b85d93fc-d552-4a35-b738-7a9ca9b363e2",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "aaee082b-9549-473d-a879-99b3df90eb83",
+        "Errors": [
+          {
+            "NextAction": "aaee082b-9549-473d-a879-99b3df90eb83",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "$.External.use_greeting"
+      },
+      "Identifier": "aaee082b-9549-473d-a879-99b3df90eb83",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "4315e24e-6b7e-4ce2-985a-d7e324296d79",
+        "Errors": [
+          {
+            "NextAction": "4315e24e-6b7e-4ce2-985a-d7e324296d79",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SSML": "<speak>\n    You entered <prosody rate=\"x-slow\"><say-as interpret-as=\"digits\">$.Attributes.case_number</say-as></prosody>.\n</speak>"
+      },
+      "Identifier": "5353091a-8c6f-4a54-bb34-e74ddd00d59b",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "62e275a7-e865-4500-bdad-1655688f0a5c",
+        "Errors": [
+          {
+            "NextAction": "62e275a7-e865-4500-bdad-1655688f0a5c",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "StoreInput": "True",
+        "InputTimeLimitSeconds": "5",
+        "Text": "Please enter your case number, followed by the pound key",
+        "DTMFConfiguration": {
+          "DisableCancelKey": "False",
+          "InputTerminationSequence": "#",
+          "InterdigitTimeLimitSeconds": "5"
+        },
+        "InputValidation": {
+          "CustomValidation": {
+            "MaximumLength": "20"
+          }
+        }
+      },
+      "Identifier": "927aafe7-144b-481c-becd-533d9e714dfc",
+      "Type": "GetParticipantInput",
+      "Transitions": {
+        "NextAction": "97c2698f-e1d2-467d-bafc-6ee63770d386",
+        "Errors": [
+          {
+            "NextAction": "97c2698f-e1d2-467d-bafc-6ee63770d386",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "case_number": "$.StoredCustomerInput"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "97c2698f-e1d2-467d-bafc-6ee63770d386",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "5353091a-8c6f-4a54-bb34-e74ddd00d59b",
+        "Errors": [
+          {
+            "NextAction": "5353091a-8c6f-4a54-bb34-e74ddd00d59b",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ]
+}
