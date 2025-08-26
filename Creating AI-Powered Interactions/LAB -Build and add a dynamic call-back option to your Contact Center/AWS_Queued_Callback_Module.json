@@ -1,0 +1,425 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "3d3a4138-acc9-4352-8352-4f9e0508e3cd",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": 40,
+      "y": 40
+    },
+    "ActionMetadata": {
+      "00198e7a-d95d-4863-b076-ddaa9069b210": {
+        "position": {
+          "x": 1950.4,
+          "y": 280
+        }
+      },
+      "2069cfbd-af4f-45f5-b164-8660bcb0c5a0": {
+        "position": {
+          "x": 428,
+          "y": 45.6
+        },
+        "conditionMetadata": [
+          {
+            "id": "a7d491dc-e6fc-4e4f-8178-9ef3fd613b4c",
+            "value": "1"
+          }
+        ]
+      },
+      "3d3a4138-acc9-4352-8352-4f9e0508e3cd": {
+        "position": {
+          "x": 152,
+          "y": 40.8
+        },
+        "conditions": [
+          {
+            "Condition": {
+              "Operands": [
+                {
+                  "unit": 1000
+                }
+              ]
+            }
+          }
+        ],
+        "conditionMetadata": [
+          {
+            "attribute": {
+              "name": "Time in Queue",
+              "value": "Time in Queue",
+              "internalValue": "CheckQueueTime"
+            },
+            "operator": {
+              "name": "Is greater than",
+              "value": "GreaterThan",
+              "shortDisplay": ">"
+            },
+            "value": "5",
+            "time": "sec."
+          }
+        ]
+      },
+      "e26fabda-70a0-49d5-b92f-48e87fde8e40": {
+        "position": {
+          "x": 440.8,
+          "y": 376.8
+        }
+      },
+      "229941c1-98d1-483f-b48f-96215793b0a3": {
+        "position": {
+          "x": 520.8,
+          "y": 696.8
+        }
+      },
+      "5574d9a3-87ef-470f-88fa-e5d6986e93e0": {
+        "position": {
+          "x": 1724,
+          "y": 228.8
+        }
+      },
+      "f3823564-cd25-45a7-8770-f3a52f5253c4": {
+        "position": {
+          "x": 1016,
+          "y": 38.4
+        }
+      },
+      "c34d9d8d-843c-4e07-94a1-6353f948857b": {
+        "position": {
+          "x": 1496.8,
+          "y": 228
+        }
+      },
+      "148cee7e-9f9e-48df-8255-52de04d39279": {
+        "position": {
+          "x": 700.8,
+          "y": 44.8
+        },
+        "conditionMetadata": [
+          {
+            "id": "21710191-415c-41e0-b96b-e72bf3a51622",
+            "value": "1"
+          },
+          {
+            "id": "9e17c898-c89a-4eb1-8cac-6fb4afbd4daf",
+            "value": "3"
+          }
+        ]
+      },
+      "c383839f-124b-40c0-a6b7-a6a76d31106e": {
+        "position": {
+          "x": 704.8,
+          "y": 436.8
+        }
+      },
+      "ab0b7047-e79e-4fe4-9ffa-977a39e80768": {
+        "position": {
+          "x": 1261.6,
+          "y": 396.8
+        }
+      },
+      "cea4d6f1-8332-4198-a766-c1b01ed23a5f": {
+        "position": {
+          "x": 1002.4,
+          "y": 396
+        },
+        "parameters": {
+          "InputValidation": {
+            "PhoneNumberValidation": {
+              "CountryCode": {
+                "displayName": "United States"
+              }
+            }
+          }
+        },
+        "conditionMetadata": [],
+        "countryCodePrefix": "+1"
+      }
+    },
+    "Annotations": [],
+    "name": "AWS_Queued_Callback_Module",
+    "description": "",
+    "status": "published",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {},
+      "Identifier": "00198e7a-d95d-4863-b076-ddaa9069b210",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "StoreInput": "False",
+        "InputTimeLimitSeconds": "5",
+        "Text": "Your wait time to speak with an agent is greater than 5 seconds. Instead of waiting in queue, we can call you back when an agent is ready to speak with you. Press 1 to set a callback. Otherwise, remain on the line to remain in queue."
+      },
+      "Identifier": "2069cfbd-af4f-45f5-b164-8660bcb0c5a0",
+      "Type": "GetParticipantInput",
+      "Transitions": {
+        "NextAction": "e26fabda-70a0-49d5-b92f-48e87fde8e40",
+        "Conditions": [
+          {
+            "NextAction": "148cee7e-9f9e-48df-8255-52de04d39279",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "1"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "e26fabda-70a0-49d5-b92f-48e87fde8e40",
+            "ErrorType": "InputTimeLimitExceeded"
+          },
+          {
+            "NextAction": "e26fabda-70a0-49d5-b92f-48e87fde8e40",
+            "ErrorType": "NoMatchingCondition"
+          },
+          {
+            "NextAction": "e26fabda-70a0-49d5-b92f-48e87fde8e40",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "MetricType": "OldestContactInQueueAgeSeconds"
+      },
+      "Identifier": "3d3a4138-acc9-4352-8352-4f9e0508e3cd",
+      "Type": "CheckMetricData",
+      "Transitions": {
+        "NextAction": "229941c1-98d1-483f-b48f-96215793b0a3",
+        "Conditions": [
+          {
+            "NextAction": "2069cfbd-af4f-45f5-b164-8660bcb0c5a0",
+            "Condition": {
+              "Operator": "NumberGreaterThan",
+              "Operands": [
+                "5000"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "229941c1-98d1-483f-b48f-96215793b0a3",
+            "ErrorType": "NoMatchingCondition"
+          },
+          {
+            "NextAction": "229941c1-98d1-483f-b48f-96215793b0a3",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "OK. We will place you in queue for an agent."
+      },
+      "Identifier": "e26fabda-70a0-49d5-b92f-48e87fde8e40",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "229941c1-98d1-483f-b48f-96215793b0a3",
+        "Errors": [
+          {
+            "NextAction": "229941c1-98d1-483f-b48f-96215793b0a3",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "229941c1-98d1-483f-b48f-96215793b0a3",
+      "Type": "EndFlowModuleExecution",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "Text": "Your callback has been scheduled. You may now hang up."
+      },
+      "Identifier": "5574d9a3-87ef-470f-88fa-e5d6986e93e0",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "00198e7a-d95d-4863-b076-ddaa9069b210",
+        "Errors": [
+          {
+            "NextAction": "00198e7a-d95d-4863-b076-ddaa9069b210",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "CallbackNumber": "$.CustomerEndpoint.Address"
+      },
+      "Identifier": "f3823564-cd25-45a7-8770-f3a52f5253c4",
+      "Type": "UpdateContactCallbackNumber",
+      "Transitions": {
+        "NextAction": "c34d9d8d-843c-4e07-94a1-6353f948857b",
+        "Errors": [
+          {
+            "NextAction": "c383839f-124b-40c0-a6b7-a6a76d31106e",
+            "ErrorType": "InvalidCallbackNumber"
+          },
+          {
+            "NextAction": "c383839f-124b-40c0-a6b7-a6a76d31106e",
+            "ErrorType": "CallbackNumberNotDialable"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "RetryDelaySeconds": "600",
+        "InitialCallDelaySeconds": "10",
+        "MaximumConnectionAttempts": "1",
+        "CallbackMode": "AgentFirst"
+      },
+      "Identifier": "c34d9d8d-843c-4e07-94a1-6353f948857b",
+      "Type": "CreateCallbackContact",
+      "Transitions": {
+        "NextAction": "5574d9a3-87ef-470f-88fa-e5d6986e93e0",
+        "Errors": [
+          {
+            "NextAction": "5574d9a3-87ef-470f-88fa-e5d6986e93e0",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "StoreInput": "False",
+        "InputTimeLimitSeconds": "5",
+        "SSML": "<speak>\nWe see that you are calling from <say-as interpret-as=\"telephone\">$.CustomerEndpoint.Address</say-as>. To receive a callback at this number, press 1. To enter a new number for this callback, press 3. \n</speak>"
+      },
+      "Identifier": "148cee7e-9f9e-48df-8255-52de04d39279",
+      "Type": "GetParticipantInput",
+      "Transitions": {
+        "NextAction": "c383839f-124b-40c0-a6b7-a6a76d31106e",
+        "Conditions": [
+          {
+            "NextAction": "f3823564-cd25-45a7-8770-f3a52f5253c4",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "1"
+              ]
+            }
+          },
+          {
+            "NextAction": "cea4d6f1-8332-4198-a766-c1b01ed23a5f",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "3"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "c383839f-124b-40c0-a6b7-a6a76d31106e",
+            "ErrorType": "InputTimeLimitExceeded"
+          },
+          {
+            "NextAction": "c383839f-124b-40c0-a6b7-a6a76d31106e",
+            "ErrorType": "NoMatchingCondition"
+          },
+          {
+            "NextAction": "c383839f-124b-40c0-a6b7-a6a76d31106e",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "The callback system encountered an error with the number that you have provided. We will place you back into queue."
+      },
+      "Identifier": "c383839f-124b-40c0-a6b7-a6a76d31106e",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "229941c1-98d1-483f-b48f-96215793b0a3",
+        "Errors": [
+          {
+            "NextAction": "229941c1-98d1-483f-b48f-96215793b0a3",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "CallbackNumber": "$.StoredCustomerInput"
+      },
+      "Identifier": "ab0b7047-e79e-4fe4-9ffa-977a39e80768",
+      "Type": "UpdateContactCallbackNumber",
+      "Transitions": {
+        "NextAction": "c34d9d8d-843c-4e07-94a1-6353f948857b",
+        "Errors": [
+          {
+            "NextAction": "c383839f-124b-40c0-a6b7-a6a76d31106e",
+            "ErrorType": "InvalidCallbackNumber"
+          },
+          {
+            "NextAction": "c383839f-124b-40c0-a6b7-a6a76d31106e",
+            "ErrorType": "CallbackNumberNotDialable"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "StoreInput": "True",
+        "InputTimeLimitSeconds": "5",
+        "Text": "Please enter the phone number at which you would like to be called back.",
+        "DTMFConfiguration": {
+          "InterdigitTimeLimitSeconds": "5"
+        },
+        "InputValidation": {
+          "PhoneNumberValidation": {
+            "NumberFormat": "Local",
+            "CountryCode": "US"
+          }
+        }
+      },
+      "Identifier": "cea4d6f1-8332-4198-a766-c1b01ed23a5f",
+      "Type": "GetParticipantInput",
+      "Transitions": {
+        "NextAction": "ab0b7047-e79e-4fe4-9ffa-977a39e80768",
+        "Errors": [
+          {
+            "NextAction": "c383839f-124b-40c0-a6b7-a6a76d31106e",
+            "ErrorType": "NoMatchingError"
+          },
+          {
+            "NextAction": "c383839f-124b-40c0-a6b7-a6a76d31106e",
+            "ErrorType": "InvalidPhoneNumber"
+          }
+        ]
+      }
+    }
+  ],
+  "Settings": {
+    "InputParameters": [],
+    "OutputParameters": [],
+    "Transitions": [
+      {
+        "DisplayName": "Success",
+        "ReferenceName": "Success",
+        "Description": ""
+      },
+      {
+        "DisplayName": "Error",
+        "ReferenceName": "Error",
+        "Description": ""
+      }
+    ]
+  }
+}
